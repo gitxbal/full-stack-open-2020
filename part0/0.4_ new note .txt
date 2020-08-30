@@ -1,5 +1,6 @@
 title 0.4: new note 
-#https://fullstack-exampleapp.herokuapp.com/notes
+# I ran this url: https://fullstack-exampleapp.herokuapp.com/notes
+# Eliot Sanford reviewed developer tools
 
 participant Browser as b
 participant Server as s
@@ -30,9 +31,14 @@ send request for
 json data
 end note
 b->s: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
-s-->b: JSON [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"},...\n {"content":"was","date":"2019-07-13T21:53:30.994Z"}]
+s-->b: JSON [{"content":"Wakanda Forever!","date":"2020-08-30T12:08:26.029Z"}...]
 note over b
-Browser funs event handler
+Browser runs event handler
 to build list items for each
 index object's content
+end note
+b->s: HTTP https://studies.cs.helsinki.fi/favicon.ico
+s-->b: JSON [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"},...\n {"content":"was","date":"2019-07-13T21:53:30.994Z"}]
+note over b
+Browser fetches cached favicon
 end note

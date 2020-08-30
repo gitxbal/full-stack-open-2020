@@ -14,7 +14,7 @@ b->s: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
 note right of s
 status 201 response sent back
 end note
-s-->b: STATUS 201 response sent back with message created
+s-->b: STATUS 201 response sent back with message created \n {content: "WAKANDA FOREVER!", date: "2020-08-30T19:16:33.018Z"}
 note over b
 Browser runs event handler on 
 201 status to print to console

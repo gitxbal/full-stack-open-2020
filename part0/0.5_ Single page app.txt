@@ -28,7 +28,7 @@ send request for
 json data
 end note
 b->s: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
-s-->b: JSON [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"},...]
+s-->b: JSON [{"content":"Wakanda Forever!","date":"2020-08-30T12:08:26.029Z"}...]
 note over b
 Browser runs event handler
 to build list items for each
