@@ -1,12 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Hello = (props) => {
-  const name = props.name
-  const age = props.age
+const Hello = ({ name, age }) => {
   const bornYear = () => {
     const yearNow = new Date().getFullYear()
-    return yearNow - props.age
+    return yearNow - age
   }
  return( 
   <>
@@ -27,7 +25,7 @@ const Header = () => {
 const Footer = () => {
   return (
     <>
-      <p>Hey! Hey! app created by <a href="https://github.com/techieeliot">Eliot Sanford</a></p>
+      <p>React Age Calculator app created by <a href="https://github.com/techieeliot">Eliot Sanford</a></p>
     </>
   )
 }
