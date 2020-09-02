@@ -9,7 +9,7 @@ const Hello = ({ name, age }) => {
  return( 
   <>
     <p>Hey {name}, you are {age} years old!</p>
-    <p>So you were probably born in {bornYear()}</p>
+    <p>So you were probably born in either {bornYear() - 1} or {bornYear()}.</p>
   </>
 )
 }
