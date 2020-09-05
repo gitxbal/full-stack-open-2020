@@ -40,3 +40,9 @@ code {
   padding: 1rem;
   z-index: 0;
 }
+
+.alt-btn {
+  background-color: initial;
+  outline-style: auto;
+  border-radius: 9999px;
+}

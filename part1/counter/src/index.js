@@ -10,10 +10,7 @@ const App = () => {
   // 1000
   // )
 
-  const handleClick = () => {
-    console.log('clicked');
-    
-  }
+  const handleClick = () => {setCounter(counter + 1)}
 
   console.log('rendering...', counter)
 
@@ -22,6 +19,9 @@ const App = () => {
       <h1>{counter}</h1>
       <button className="btn" onClick={handleClick}>
         👍
+      </button>
+      <button className="btn alt-btn" onClick={() => setCounter(0)}> 
+        Reset
       </button>
     </main>
   )
