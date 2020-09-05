@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 
 const Hello = ({ name, age }) => {
   const bornYear = () => {
@@ -35,13 +36,13 @@ const name = 'Jude'
 const age = 1
 
 return (
-<>
+<main className="container">
   <Header />
   <Hello name="Selah" age={5} />
   <Hello name="Norah" age={3} />
   <Hello name={name} age={age} />
   <Footer />
-</>
+</main>
 )
 }
 
