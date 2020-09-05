@@ -13,7 +13,30 @@ code {
 }
 
 
-h1 {
+.container {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   text-align: center;
   margin: 50vh auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+.btn {
+  width: calc(75px);
+  min-height: 39px;
+  background-color: rgb(29, 161, 242);
+  outline-style: none;
+  transition-property: background-color, box-shadow;
+  transition-duration: 0.2s;
+  padding: 0 1em;
+  border: rgba(0, 0, 0, 0) 1px solid;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  margin: 3rem;
+  padding: 1rem;
+  z-index: 0;
 }
