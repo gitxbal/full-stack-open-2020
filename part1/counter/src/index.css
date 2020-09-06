@@ -42,7 +42,19 @@ code {
 }
 
 .alt-btn {
+  border: #33332d 1px solid;
   background-color: initial;
-  outline-style: auto;
   border-radius: 9999px;
+}
+
+.btn:hover {
+  border: rgb(29, 161, 242) 1px solid;
+  background-color: transparent;
+  color: rgb(29, 161, 242);
+  
+}
+
+.alt-btn:hover {
+  background-color: #33332d;
+  color: #fff;
 }
