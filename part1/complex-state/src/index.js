@@ -7,8 +7,8 @@ const App = (props) => {
   const [right, setRight] = useState(0)
 
   return (
-    <div>
-      <div>
+    <main className="container">
+      <section className="button-box">
         {left}
         <button onClick={() => setLeft(left + 1)}>
           left
@@ -17,8 +17,8 @@ const App = (props) => {
           right
         </button>
         {right}
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
 
