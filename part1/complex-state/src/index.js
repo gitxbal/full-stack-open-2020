@@ -8,16 +8,16 @@ const App = (props) => {
   })
 
   const handleLeftClick = () => {
-    const newClicks = { 
-      left: clicks.left + 1, 
-      right: clicks.right 
+    const newClicks = {
+      ...clicks,
+      left: clicks.left + 1 
     }
     setClicks(newClicks)
   }
 
   const handleRightClick = () => {
-    const newClicks = { 
-      left: clicks.left, 
+    const newClicks = {
+      ...clicks,
       right: clicks.right + 1 
     }
     setClicks(newClicks)
