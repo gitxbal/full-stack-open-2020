@@ -2,6 +2,23 @@ import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const ButtonLog = (props) => {
+  if (props.allClicks.length === 0) {
+    return(
+      <div>
+        Begin using the app by pressing one of the buttons above.
+      </div>
+    )
+  }
+
+  return(
+    <div>
+      <p>Button press log: </p>
+      <p>{props.allClicks.join(' ')}</p>
+    </div>
+  )
+}
+
 const App = (props) => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -26,7 +43,7 @@ const App = (props) => {
         <button onClick={handleRightClick}>right</button>
         {right}
       </section>
-        <p>{allClicks.join(' ')}</p>
+      <ButtonLog allClicks={allClicks} />
     </main>
   )
 }
