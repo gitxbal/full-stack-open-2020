@@ -19,6 +19,10 @@ const ButtonLog = (props) => {
   )
 }
 
+const Button = ({onClick, text}) => (
+  <button onClick={onClick}>{text}</button>
+)
+
 const App = (props) => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -39,8 +43,8 @@ const App = (props) => {
     <main className="container">
       <section className="button-box">
         {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
+        <Button onClick={handleLeftClick} text={left} />
+        <Button onClick={handleRightClick} text={right} />
         {right}
       </section>
       <ButtonLog allClicks={allClicks} />
