@@ -28,7 +28,6 @@ const App = (props) => {
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
 
-
   const handleLeftClick = () => {
     setAll(allClicks.concat('L'))
     setLeft(left + 1)
@@ -38,16 +37,21 @@ const App = (props) => {
     setAll(allClicks.concat('R'))
     setRight(right + 1)
   }
-
+  const resetApp = () => {
+    setAll([])
+    setRight(0)
+    setLeft(0)
+  }
   return (
     <main className="container">
       <section className="button-box">
         {left}
-        <Button onClick={handleLeftClick} text={left} />
-        <Button onClick={handleRightClick} text={right} />
+        <Button onClick={handleLeftClick} text="left" />
+        <Button onClick={handleRightClick} text="right" />
         {right}
       </section>
       <ButtonLog allClicks={allClicks} />
+      <Button onClick={resetApp} text="reset" />
     </main>
   )
 }
