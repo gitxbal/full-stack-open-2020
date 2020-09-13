@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Statistic = ({name, value}) => (
-  <p>{name} {value}</p>
+  <tr>
+    <td>{name}</td>
+    <td>{value}</td>
+  </tr>
 )
 
 const Button = ({onClick, text}) => (
@@ -17,12 +20,16 @@ const Statistics = (props) => {
   }
   return(
     <>
-      <Statistic name="good" value={props.good} />
-      <Statistic name="neutral" value={props.neutral} />
-      <Statistic name="bad" value={props.bad} />
-      <Statistic name="all" value={props.allFeedback} />
-      <Statistic name="average" value={props.average} />
-      <Statistic name="positive" value={props.positive} />
+      <table>
+        <tbody>
+          <Statistic name="good" value={props.good} />
+          <Statistic name="neutral" value={props.neutral} />
+          <Statistic name="bad" value={props.bad} />
+          <Statistic name="all" value={props.allFeedback} />
+          <Statistic name="average" value={props.average} />
+          <Statistic name="positive" value={props.positive} />
+        </tbody>
+      </table>
     </>
   )
 }
