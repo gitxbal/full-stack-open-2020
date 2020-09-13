@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Statistic = ({name, value}) => (
+  <p>{name} {value}</p>
+)
+
+const Button = ({onClick, text}) => (
+  <button onClick={onClick}>{text}</button>
+)
+
 const Statistics = (props) => {
   if(props.allFeedback === 0){
     return (
@@ -9,12 +17,12 @@ const Statistics = (props) => {
   }
   return(
     <>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.allFeedback}</p>
-      <p>average {props.average}</p>
-      <p>positive {props.positive}</p>
+      <Statistic name="good" value={props.good} />
+      <Statistic name="neutral" value={props.neutral} />
+      <Statistic name="bad" value={props.bad} />
+      <Statistic name="all" value={props.allFeedback} />
+      <Statistic name="average" value={props.average} />
+      <Statistic name="positive" value={props.positive} />
     </>
   )
 }
@@ -49,9 +57,15 @@ const App = () => {
     <>
       <h1>give feedback</h1>
       <section className="buttons">
-        <button onClick={handleGood}>good</button>
-        <button onClick={handleNeutral}>neutral</button>
-        <button onClick={handleBad}>bad</button>
+        <Button 
+          onClick={handleGood}
+          text="good"/>
+        <Button 
+          onClick={handleNeutral}
+          text="neutral"/>
+        <Button 
+          onClick={handleBad}
+          text="bad"/>
       </section>
       <h1>statistics</h1>
       <section>
