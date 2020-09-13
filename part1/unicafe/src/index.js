@@ -8,7 +8,7 @@ const App = () => {
   const [bad, setBad] = useState(0)
   const [allFeedback, setFeedback] = useState([])
 
-  const FeedbackLog = (props) => {
+  const Statistics = (props) => {
     if(props.allFeedback === 0){
       return (
         <p>Begin using the app by pressing one of the buttons above.</p>
@@ -54,7 +54,7 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
-      <FeedbackLog 
+      <Statistics 
         allFeedback={allFeedback.length} 
         average={average}
         positive={positive}/>
