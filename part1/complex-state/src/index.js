@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const ButtonLog = (props) => {
+  // debugger;
   if (props.allClicks.length === 0) {
     return(
       <div>
