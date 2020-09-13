@@ -59,7 +59,6 @@ const App = () => {
     setBad(bad + 1)
   }
   
-
   return (
     <>
       <h1>give feedback</h1>
