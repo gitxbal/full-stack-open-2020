@@ -4,19 +4,18 @@ import ReactDOM from 'react-dom'
 const Statistics = (props) => {
   if(props.allFeedback === 0){
     return (
-      <p>Begin using the app by pressing one of the buttons above.</p>
+      <p>No feedback given</p>
     )
   }
   return(
-    <div>
-      <h1>statistics</h1>
+    <>
       <p>good {props.good}</p>
       <p>neutral {props.neutral}</p>
       <p>bad {props.bad}</p>
       <p>all {props.allFeedback}</p>
       <p>average {props.average}</p>
       <p>positive {props.positive}</p>
-    </div>
+    </>
   )
 }
 
@@ -54,13 +53,16 @@ const App = () => {
         <button onClick={handleNeutral}>neutral</button>
         <button onClick={handleBad}>bad</button>
       </section>
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        allFeedback={allFeedback.length} 
-        average={average}
-        positive={positive}/>
+      <h1>statistics</h1>
+      <section>
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          allFeedback={allFeedback.length} 
+          average={average}
+          positive={positive}/>
+      </section>
     </>
   )
 }
