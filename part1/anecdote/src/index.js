@@ -7,6 +7,15 @@ const SelectedAnecdote = ({anecdotes, selected}) => (
 
 const App = () => {
   const [selected, setSelected] = useState(0)
+  const initialPoints = new Array(anecdotes.length).fill(0)
+  const [points, setPoints] = useState(initialPoints)
+
+  const handleVote = () => {  
+    const copy = [...points]
+    copy[selected] += 1
+    setPoints(copy)
+  }
+
   const getRandomNumber = (max) => Math.floor(Math.random() * Math.floor(max))
   const handleNext = () => {
     const newIndex = getRandomNumber(anecdotes.length)
@@ -15,7 +24,10 @@ const App = () => {
   return (
     <>
       <SelectedAnecdote anecdotes={anecdotes} selected={selected} />
-      <button onClick={handleNext}>next anecdote</button>
+      <section>
+        <button onClick={handleVote}>vote</button>
+        <button onClick={handleNext}>next anecdote</button>
+      </section>
     </>
   )
 }
