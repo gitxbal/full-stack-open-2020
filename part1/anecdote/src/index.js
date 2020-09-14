@@ -24,6 +24,7 @@ const App = () => {
   return (
     <>
       <SelectedAnecdote anecdotes={anecdotes} selected={selected} />
+      <p>has {points[selected]} votes</p>
       <section>
         <button onClick={handleVote}>vote</button>
         <button onClick={handleNext}>next anecdote</button>
