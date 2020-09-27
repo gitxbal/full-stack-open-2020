@@ -1,16 +1,22 @@
 import React from 'react'
 import Content from './Content'
 import Header from './Header'
+import Total from './Total'
 
-const Course = ({course}) => {
+const Course = ({courses}) => {
 
     return (
-        <>
-          <Header course={course} />
-          <Content course={course} />
-          {/* <Total course={course} /> */}
+      <>
+        <h1>Web development curriculuum</h1>
+        {courses.map(course => 
+          <>
+            <Header   name={course.name} />
+            <Content  parts={course.parts} />
+            <Total    parts={course.parts} />
+          </>
+        )}
         </>
-      )
+    )
 }
 
 export default Course
