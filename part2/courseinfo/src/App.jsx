@@ -1,5 +1,5 @@
 import React from 'react'
-import Courses from './components/Courses'
+import Course from './components/Course'
 
 const App = () => {
     const courses = [
@@ -47,7 +47,7 @@ const App = () => {
       }
     ]
 
-    return <Courses courses={courses} />
+    return <Course courses={courses} />
   }
 
   export default App
