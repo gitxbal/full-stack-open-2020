@@ -2,7 +2,7 @@ import React from 'react'
 
 const Item = ({ name, number }) => (
     <>
-        <li>{name} {number}</li>
+        <li style={{margin: "1rem 0" }}>{name} {number}</li>
     </>
 )
 
