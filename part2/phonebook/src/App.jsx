@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import Item from './components/Item'
+import './App.css'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -26,6 +29,9 @@ const App = () => {
     if (!phoneNumberRegex.test(newNumber)) {
       return alert('Please enter a valid 10-digit phone number')
     }
+    if (persons.some(item => item.name === newName)) {
+      return alert(`${newName} is already added to phonebook`)
+    }
 
     const personObject = {
       date: new Date().toISOString(),
@@ -33,22 +39,23 @@ const App = () => {
       name: newName,
       number: newNumber,
     }
-    if (persons.some(item => item.name === newName)) {
-      return alert(`${newName} is already added to phonebook`)
-    }
+    
     setPersons(persons.concat(personObject))
     setNewName('')
     setNewNumber('')
   }
 
   const handlePersonNameChange = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
   const handlePersonNumberChange = (event) => {
-    console.log(event.target.value)
     const formattedPhoneNumber = event.target.value.replace(phoneNumberRegex, "($1) $2-$3")
     setNewNumber(formattedPhoneNumber)
+  }
+
+  const handleFilterChange = (event) => {
+    setFilterName(event.target.value)
+    setShowAll(!showAll)
   }
 
   const itemsToShow = showAll 
@@ -58,45 +65,16 @@ const App = () => {
   return (
     <>
       <h1>Phonebook</h1>
-      <label for="filter-input">filter shown with <input 
-        id="filter-input"
-        type="text"
-        value={filterName}
-        onChange={(event) => {
-          setFilterName(event.target.value)
-          setShowAll(!showAll)
-        }} /> 
-      </label>
+      <Filter filterName={filterName}
+        handleFilterChange={handleFilterChange} />
       <h2>add a new number</h2>
-      <form onSubmit={addPerson}>
-        <label  for="name"
-                style={{display: "block"}}>name: <input
-                id="name"
-                type="text"
-                autoComplete="name"
-                value={newName}
-                onChange={handlePersonNameChange} required/>
-        </label>
-        <label  for="number"
-                style={{display: "block", margin: "1rem 0" }}>number: <input
-                id="number"
-                type="tel"
-                autocomplete="tel"
-                value={newNumber}
-                onChange={handlePersonNumberChange} required/>
-        </label>
-        <section>
-          <button type="submit">add</button>
-        </section>
-      </form>
+      <PersonForm addPerson={addPerson}
+        newName={newName}
+        handlePersonNameChange={handlePersonNameChange}
+        newNumber={newNumber}
+        handlePersonNumberChange={handlePersonNumberChange} />
       <h2>Numbers</h2>
-      <section>
-        <ul>
-          {itemsToShow.map(person => 
-            <Item key={person.id} name={person.name} number={person.number} />
-          )}
-        </ul>
-      </section>
+      <Persons itemsToShow={itemsToShow} />
     </>
   )
 }
