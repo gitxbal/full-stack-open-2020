@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+
+.field-box {
+  margin: 1rem 0;
+  width: 225px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
