@@ -46,7 +46,10 @@ const App = () => {
   }
 
   const handlePersonNameChange = (event) => {
-    setNewName(event.target.value)
+    let string = event.target.value
+    string.toLowerCase()
+    string.replace(/\b\w/g, firstLetter => firstLetter.toUpperCase())
+    setNewName(string)
   }
   const handlePersonNumberChange = (event) => {
     const formattedPhoneNumber = event.target.value.replace(phoneNumberRegex, "($1) $2-$3")
