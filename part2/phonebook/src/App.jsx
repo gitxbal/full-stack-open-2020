@@ -47,8 +47,8 @@ const App = () => {
 
   const handlePersonNameChange = (event) => {
     let string = event.target.value
-    string.toLowerCase()
-    string.replace(/\b\w/g, firstLetter => firstLetter.toUpperCase())
+    const capitalizeOnlyFirstLetter = s =>  s.toLowerCase().replace( /\b./g, a => a.toUpperCase() )
+    string = capitalizeOnlyFirstLetter(string)
     setNewName(string)
   }
   const handlePersonNumberChange = (event) => {
