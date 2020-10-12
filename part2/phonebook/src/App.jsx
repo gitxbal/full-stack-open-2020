@@ -46,7 +46,10 @@ const App = () => {
   }
 
   const handlePersonNameChange = (event) => {
-    setNewName(event.target.value)
+    let string = event.target.value
+    const capitalizeOnlyFirstLetter = s =>  s.toLowerCase().replace( /\b./g, a => a.toUpperCase() )
+    string = capitalizeOnlyFirstLetter(string)
+    setNewName(string)
   }
   const handlePersonNumberChange = (event) => {
     const formattedPhoneNumber = event.target.value.replace(phoneNumberRegex, "($1) $2-$3")
