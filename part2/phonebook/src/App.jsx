@@ -1,24 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import axios from 'axios'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    { date: "2020-09-28T14:29:52.146Z", id: 1 , name: 'Bob Loblaw', number: '(555) 555-5555' },
-    { date: "2020-10-12T08:21:05.322Z", id: 2 , name: 'Gob Bluth', number: '(617) 382-8888' },
-    { date: "2020-10-12T08:21:05.322Z", id: 3 , name: 'Tobias Fünke', number: '(838) 929-3768' },
-    { date: "2020-10-12T08:21:05.322Z", id: 4 , name: 'Michael Bluth', number: '(689) 838-8383' },
-    { date: "2020-10-12T08:21:05.322Z", id: 5 , name: 'George Bluth Sr.', number: '(987) 654-4321' },
-    { date: "2020-10-12T08:21:05.322Z", id: 6 , name: 'Lindsay Bluth Fünke', number: '(468) 273-4629' },
-    { date: "2020-10-12T08:21:05.322Z", id: 7 , name: 'George Michael Bluth', number: '(876) 543-2121' },
-  ]) 
+  const [ persons, setPersons ] = useState([]) 
   const [ newName, setNewName ] = useState('... add a new person')
   const [ newNumber, setNewNumber ] = useState('... add a new number')
   const [showAll, setShowAll] = useState(true)
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }, [])
 
   const addPerson = (event) => {
     event.preventDefault()
