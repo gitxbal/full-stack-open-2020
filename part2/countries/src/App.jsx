@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import './App.css';
 import axios from 'axios'
+import CountryCard from './components/CountryCard';
+import CountryList from './components/CountryList';
+import Filter from './components/Filter'
 
 function App() {
   const [countriesData, setCountriesData] = useState([])
@@ -41,45 +44,28 @@ function App() {
   const indexOfSingle = countriesData.findIndex(isCountryNameMatch)
   return (
    <main className="App">
-    <section>
-      <input 
-        id="filter-input"
-        type="text"
-        value={filterName}
-        onChange={handleFilterChange} /> 
-    </section>
+    <Filter
+      filterName={filterName}
+      handleFilterChange={handleFilterChange} />
+
     
-    {
+    {   
+        // Ternaries to map through country data
+        // Check if nothing in the input
         (!countriesToShow.length) ? 
-        "No matches" :
+        <p>No matches</p> :
+        // Check if over 10 results
         (countriesToShow.length > 10 ) ? 
-        "Too many matches, specify another" :  
+        <p>Too many matches, specify another</p> : 
+        // Check if less than ten but still more than one 
         (countriesToShow.length > 1 ) ? 
-        <>
-          <section>
-            <ul>
-              {filterList}
-            </ul>
-          </section>
-        </>
+        <CountryList filterList={filterList}/>
         : 
-        <>
-          <h1>{filterSingle}</h1>
-          <p>capital {countriesData[indexOfSingle]?.capital}</p>
-          <p>population {countriesData[indexOfSingle]?.population}</p>
-
-          <h2>languages</h2>
-          <ul>
-            {
-            countriesData[indexOfSingle]?.languages
-              .map(language => {
-                count++
-                return(<li key={count}>{language?.name}</li>)})
-            }
-          </ul>
-          <img src={countriesData[indexOfSingle]?.flag} alt={`Flag of ${filterSingle}`} height="200px"/>
-
-        </>
+        // Only one match
+        <CountryCard 
+          filterSingle={filterSingle}
+          countriesData={countriesData}
+          indexOfSingle={indexOfSingle} />
     }
   
    </main>
