@@ -33,7 +33,7 @@ function App() {
   // what displays when more than one item found
   const filterList = countriesToShow.map(country => {
     count++ 
-    return(<li key={count}>{country.name}</li>)
+    return(<li key={count} style={{marginBottom: "0.25rem"}}><label>{country.name}<button style={{marginLeft: "0.5rem"}} onClick={() => setFilterName(country.name)}>Show</button></label></li>)
   })
 
   // filting until you find one item
@@ -48,12 +48,14 @@ function App() {
       filterName={filterName}
       handleFilterChange={handleFilterChange} />
 
-    
     {   
-        // Ternaries to map through country data
+        // Multiple ternaries to map through country data
+        // Starts with an empty search field
+        (!filterName.length) ?
+        <p>Enter a country name above</p> :
         // Check if nothing in the input
         (!countriesToShow.length) ? 
-        <p>No matches</p> :
+        <p>No matches <button style={{marginLeft: "0.5rem"}} onClick={() => setFilterName('')}>Reset</button></p> :
         // Check if over 10 results
         (countriesToShow.length > 10 ) ? 
         <p>Too many matches, specify another</p> : 
