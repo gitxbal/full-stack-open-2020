@@ -4,6 +4,7 @@ import axios from 'axios'
 import CountryCard from './components/CountryCard';
 import CountryList from './components/CountryList';
 import Filter from './components/Filter'
+import WeatherCard from './components/WeatherCard'
 
 function App() {
   // Country Variables
@@ -12,8 +13,9 @@ function App() {
   
   // Weather API Variables
   const [weatherData, setWeatherData] = useState([])
+  const ApiUrl = 'http://api.weatherstack.com/current'
   const api_key = process.env.REACT_APP_API_KEY
-  const [capitalCity, setCapitalCity] = useState('')
+  const [encodedCapitalCity, setEncodedCapitalCity] = useState('')
   
   let count = 0
   
@@ -42,30 +44,36 @@ function App() {
       console.log('country promise fulfilled')
       setCountriesData(response.data)
     })
-    const unEncodedCapitalCity = `${countriesData[indexOfSingle]?.capital}, ${filterSingle}`
-    setCapitalCity(encodeURI(unEncodedCapitalCity))
+
+
+    const unencodedCapitalCity =  `${countriesData[indexOfSingle]?.capital || "unknown"}`
+    setEncodedCapitalCity(encodeURI(unencodedCapitalCity))
   }
-  , [])
+  , [filterSingle])
+  
   
   useEffect(() => {
     console.log('weather effect')
-    if(capitalCity){
-      const ApiUrl = `http://api.weatherstack.com/current?access_key=${api_key}&query=${capitalCity}&units=f`
+    const params = {
+      access_key: api_key,
+      query: encodedCapitalCity,
+      units: 'f'
+    }
+    if(encodedCapitalCity){
         axios
-        .get(ApiUrl)
+        .get(ApiUrl, {params})
         .then(response => {
           console.log('weather promise fulfilled')
           setWeatherData(response.data)
         })
     }
-    
-    }
-    , [filterSingle])
+  }
+  , [encodedCapitalCity])
  
-
   const handleFilterChange = (event) => {
     setFilterName(event.target.value)
   }
+
   return (
    <main className="App">
     <Filter
@@ -88,12 +96,20 @@ function App() {
         <CountryList filterList={filterList}/>
         : 
         // Only one match
-        <CountryCard 
-          filterSingle={filterSingle}
-          countriesData={countriesData}
-          indexOfSingle={indexOfSingle}
-          capitalCity={capitalCity}
-          setCapitalCity={setCapitalCity} />
+        <>
+          <CountryCard 
+            filterSingle={filterSingle}
+            countriesData={countriesData}
+            indexOfSingle={indexOfSingle}
+            weatherData={weatherData} />
+
+          {/* Weather Card Ternary 
+            - capital location canot be unknown */}
+          {(weatherData.location?.name) ? 
+            <WeatherCard weatherData={weatherData} />
+            :
+            <h2>Weather data unavailable</h2>}
+        </>
     }
   
    </main>
