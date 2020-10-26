@@ -6,27 +6,17 @@ import CountryList from './components/CountryList';
 import Filter from './components/Filter'
 
 function App() {
+  // Country Variables
   const [countriesData, setCountriesData] = useState([])
   const [filterName, setFilterName] = useState('')
-
-  // fetch the data for all countries from the website
-  useEffect(() => {
-    console.log('effect')
-    axios
-      .get('https://restcountries.eu/rest/v2/all')
-      .then(response => {
-        console.log('promise fulfilled')
-        setCountriesData(response.data)
-      })
-  }
-  , [])
-
-  const handleFilterChange = (event) => {
-    setFilterName(event.target.value)
-  }
-
+  
+  // Weather API Variables
+  const [weatherData, setWeatherData] = useState([])
+  const api_key = process.env.REACT_APP_API_KEY
+  const [capitalCity, setCapitalCity] = useState('')
+  
   let count = 0
- 
+  
   // limit the displayed countries to only show ones included in the input
   const countriesToShow = countriesData.filter(item => item.name.toLowerCase().includes(filterName.toLowerCase()))
   
@@ -35,13 +25,47 @@ function App() {
     count++ 
     return(<li key={count} style={{marginBottom: "0.25rem"}}><label>{country.name}<button style={{marginLeft: "0.5rem"}} onClick={() => setFilterName(country.name)}>Show</button></label></li>)
   })
-
-  // filting until you find one item
+  
+  // filtering until you find one item
   const filterSingle = (filterList.length === 1) ? countriesToShow[0]?.name : ''
   const isCountryNameMatch = item => item?.name === filterSingle
   
   // find the location of when you've found one
   const indexOfSingle = countriesData.findIndex(isCountryNameMatch)
+  
+  // fetch the data for all countries from the website
+  useEffect(() => {
+    console.log('country effect')
+    axios
+    .get('https://restcountries.eu/rest/v2/all')
+    .then(response => {
+      console.log('country promise fulfilled')
+      setCountriesData(response.data)
+    })
+    const unEncodedCapitalCity = `${countriesData[indexOfSingle]?.capital}, ${filterSingle}`
+    setCapitalCity(encodeURI(unEncodedCapitalCity))
+  }
+  , [])
+  
+  useEffect(() => {
+    console.log('weather effect')
+    if(capitalCity){
+      const ApiUrl = `http://api.weatherstack.com/current?access_key=${api_key}&query=${capitalCity}&units=f`
+        axios
+        .get(ApiUrl)
+        .then(response => {
+          console.log('weather promise fulfilled')
+          setWeatherData(response.data)
+        })
+    }
+    
+    }
+    , [filterSingle])
+ 
+
+  const handleFilterChange = (event) => {
+    setFilterName(event.target.value)
+  }
   return (
    <main className="App">
     <Filter
@@ -67,7 +91,9 @@ function App() {
         <CountryCard 
           filterSingle={filterSingle}
           countriesData={countriesData}
-          indexOfSingle={indexOfSingle} />
+          indexOfSingle={indexOfSingle}
+          capitalCity={capitalCity}
+          setCapitalCity={setCapitalCity} />
     }
   
    </main>

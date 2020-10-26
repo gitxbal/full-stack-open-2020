@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
-const CountryCard = ({filterSingle, countriesData, indexOfSingle}) => {
+const CountryCard = ({filterSingle, countriesData, indexOfSingle, capitalCity, setCapitalCity }) => {
     let count = 0
+
     return(
         <>
           <h1>{filterSingle}</h1>
