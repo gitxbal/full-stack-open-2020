@@ -13,9 +13,10 @@ function App() {
   
   // Weather API Variables
   const [weatherData, setWeatherData] = useState([])
-  const ApiUrl = 'http://api.weatherstack.com/current'
-  const api_key = process.env.REACT_APP_API_KEY
+  const ApiUrl = 'https://api.weatherbit.io/v2.0/current'
+  const api_key = process.env.REACT_APP_WEATHERBIT_API_KEY
   const [encodedCapitalCity, setEncodedCapitalCity] = useState('')
+  const [countryCode, setCountryCode] = useState('')
   
   let count = 0
   
@@ -45,8 +46,14 @@ function App() {
       setCountriesData(response.data)
     })
 
-
-    const unencodedCapitalCity =  `${countriesData[indexOfSingle]?.capital || "unknown"}`
+    const alpha2Code = `${countriesData[indexOfSingle]?.alpha2Code}`
+    setCountryCode(alpha2Code)
+    const capitalData = countriesData[indexOfSingle]?.capital.split(',')
+    let unencodedCapitalCity
+    (typeof(capitalData)==='object')?
+     (unencodedCapitalCity =  `${capitalData[0] || "unknown"}`):
+     (unencodedCapitalCity =  `${capitalData || "unknown"}`)
+      
     setEncodedCapitalCity(encodeURI(unencodedCapitalCity))
   }
   , [filterSingle])
@@ -55,16 +62,17 @@ function App() {
   useEffect(() => {
     console.log('weather effect')
     const params = {
-      access_key: api_key,
-      query: encodedCapitalCity,
-      units: 'f'
+      key: api_key,
+      city: encodedCapitalCity,
+      country: countryCode,
+      units: 'I'
     }
     if(encodedCapitalCity){
         axios
         .get(ApiUrl, {params})
         .then(response => {
           console.log('weather promise fulfilled')
-          setWeatherData(response.data)
+          setWeatherData(response.data?.data)
         })
     }
   }
@@ -105,7 +113,7 @@ function App() {
 
           {/* Weather Card Ternary 
             - capital location canot be unknown */}
-          {(weatherData.location?.name) ? 
+          {(weatherData) ? 
             <WeatherCard weatherData={weatherData} />
             :
             <h2>Weather data unavailable</h2>}
