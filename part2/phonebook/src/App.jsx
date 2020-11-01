@@ -12,11 +12,12 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  const personsUrl = 'http://localhost:3001/persons'
 
   useEffect(() => {
     console.log('effect')
     axios
-      .get('http://localhost:3001/persons')
+      .get(personsUrl)
       .then(response => {
         console.log('promise fulfilled')
         setPersons(response.data)
@@ -42,10 +43,14 @@ const App = () => {
       name: newName,
       number: newNumber,
     }
-    
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber('')
+
+    axios.
+      post(personsUrl, personObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   const handlePersonNameChange = (event) => {
