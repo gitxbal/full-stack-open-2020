@@ -12,6 +12,7 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  const [ deleted , setDeleted ] = useState(0)
 
   useEffect(() => {
     console.log('effect')
@@ -21,7 +22,7 @@ const App = () => {
         console.log('promise fulfilled')
         setPersons(initialItems)
       })
-  }, [])
+  }, [deleted])
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -36,9 +37,14 @@ const App = () => {
       return alert(`${newName} is already added to phonebook`)
     }
 
+    const maxId = persons.reduce(
+      (max, person) => (person.id > max ? person.id : max),
+      persons[0].id
+    )
+
     const personObject = {
       date: new Date().toISOString(),
-      id: persons.length + 1,
+      id: maxId + 1,
       name: newName,
       number: newNumber,
     }
@@ -50,6 +56,16 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
+  }
+
+  const deletePerson = (event) => {
+    const confirmDelete = window.confirm(`Delete ${event.target.name}?`) 
+    if (!confirmDelete) {
+      return
+    }
+    itemsService
+    .deleteItem(event.target.id)
+    .then(() => setDeleted(deleted + 1))   
   }
 
   const handlePersonNameChange = (event) => {
@@ -84,7 +100,7 @@ const App = () => {
         newNumber={newNumber}
         handlePersonNumberChange={handlePersonNumberChange} />
       <h2>Numbers</h2>
-      <Persons itemsToShow={itemsToShow} />
+      <Persons itemsToShow={itemsToShow} deletePerson={deletePerson} />
     </>
   )
 }

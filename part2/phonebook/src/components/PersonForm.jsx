@@ -21,7 +21,8 @@ const PersonForm = ({ addPerson, newName, handlePersonNameChange, newNumber, han
                         backgroundColor: "#FD5656", 
                         color: "#EEF4D7", 
                         fontWeight: "900", 
-                        fontSize: "1.5rem"}
+                        fontSize: "1.5rem",
+                        padding: "0.25rem"}
                     }>
                     add
                 </button>
