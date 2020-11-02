@@ -64,7 +64,7 @@ const App = () => {
       return
     }
     itemsService
-    .deleteItem(event.target.id)
+    .deleteItem(event.target.className)
     .then(() => setDeleted(deleted + 1))   
   }
 

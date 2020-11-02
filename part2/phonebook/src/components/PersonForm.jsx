@@ -18,8 +18,8 @@ const PersonForm = ({ addPerson, newName, handlePersonNameChange, newNumber, han
                 <button type="submit" 
                     style={
                         {width: "100%", 
-                        backgroundColor: "#FD5656", 
-                        color: "#EEF4D7", 
+                        backgroundColor: "#FAE601", 
+                        color: "#37549D", 
                         fontWeight: "900", 
                         fontSize: "1.5rem",
                         padding: "0.25rem"}
