@@ -15,7 +15,10 @@ const App = () => {
       .then(initialNotes => {
         console.log('promise fulfilled')
         setNotes(initialNotes)
-    })
+      })
+      .catch(error => {
+        console.log('promise failed:', error)
+      })
   }, [])
 
 
@@ -33,6 +36,9 @@ const addNote = (event) => {
     .then(returnedNote => {
       setNotes(notes.concat(returnedNote))
       setNewNote('')
+    })
+    .catch(error => {
+      console.log('create object failed:', error)
     })
 }
 
@@ -53,7 +59,14 @@ const notesToShow = showAll
     noteService
       .update(id, changedNote)
       .then(returnedNote => {
-        setNotes(notes.map(note => note.id !== id ? note : returnedNote))      })
+        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+       })
+       .catch(error => {
+        alert(
+          `the note '${note.content}' was already deleted from server`
+        )
+        setNotes(notes.filter(n => n.id !== id))
+      })
   }
 
 return (
@@ -73,7 +86,7 @@ return (
       <input 
         value={newNote} 
         onChange={handleNoteChange}/>
-  <button type="submit" style={{marginLeft: "1rem"}}>save</button>
+  <button type="submit" style={{marginLeft: "1rem", backgroundColor: "#BFDFC9", color: "#8F1E5D"}}>save</button>
     </form> 
   </>
 )}
