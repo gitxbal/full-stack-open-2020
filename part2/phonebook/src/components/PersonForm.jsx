@@ -15,7 +15,16 @@ const PersonForm = ({ addPerson, newName, handlePersonNameChange, newNumber, han
                 value={newNumber}
                 handleFunction={handlePersonNumberChange} />
             <section style={{width: "225px"}}>
-                <button type="submit" style={{width: "100%"}}>add</button>
+                <button type="submit" 
+                    style={
+                        {width: "100%", 
+                        backgroundColor: "#FD5656", 
+                        color: "#EEF4D7", 
+                        fontWeight: "900", 
+                        fontSize: "1.5rem"}
+                    }>
+                    add
+                </button>
             </section>
         </form>
     </>

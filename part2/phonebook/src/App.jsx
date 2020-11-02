@@ -3,7 +3,7 @@ import './App.css'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
+import itemsService from './services/items'
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -12,15 +12,14 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-  const personsUrl = 'http://localhost:3001/persons'
 
   useEffect(() => {
     console.log('effect')
-    axios
-      .get(personsUrl)
-      .then(response => {
+    itemsService
+      .getAll()
+      .then(initialItems => {
         console.log('promise fulfilled')
-        setPersons(response.data)
+        setPersons(initialItems)
       })
   }, [])
 
@@ -44,10 +43,10 @@ const App = () => {
       number: newNumber,
     }
 
-    axios.
-      post(personsUrl, personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    itemsService.
+      create(personObject)
+      .then(returnedPersons => {
+        setPersons(persons.concat(returnedPersons))
         setNewName('')
         setNewNumber('')
       })
