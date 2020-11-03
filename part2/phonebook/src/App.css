@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+h1, h2 {
+  color: #37549D;
+}
+
+label, li {
+  font-size: 1.1rem;
+}
+
 .field-box {
   margin: 1rem 0;
   width: 225px;

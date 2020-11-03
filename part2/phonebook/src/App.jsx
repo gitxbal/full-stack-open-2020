@@ -3,7 +3,7 @@ import './App.css'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
+import itemsService from './services/items'
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -12,17 +12,17 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-  const personsUrl = 'http://localhost:3001/persons'
+  const [ toggle , setToggle ] = useState(false)
 
   useEffect(() => {
     console.log('effect')
-    axios
-      .get(personsUrl)
-      .then(response => {
+    itemsService
+      .getAll()
+      .then(initialItems => {
         console.log('promise fulfilled')
-        setPersons(response.data)
+        setPersons(initialItems)
       })
-  }, [])
+  }, [toggle])
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -33,24 +33,70 @@ const App = () => {
     if (!phoneNumberRegex.test(newNumber)) {
       return alert('Please enter a valid 10-digit phone number')
     }
-    if (persons.some(item => item.name === newName)) {
+    if (persons.some(item => item.name === newName) && persons.some(item => item.number === newNumber)) {
       return alert(`${newName} is already added to phonebook`)
     }
+    if (persons.some(item => item.name === newName)) {
+      let updatedPerson = persons.filter(item => item.name === newName)
+      let updateId = updatedPerson.map(item => item.id)
+      updateId = updateId[0]
+      
+      const newPersonObject = {
+        date: new Date().toISOString(),
+        id: updateId,
+        name: newName,
+        number: newNumber
+      }
+      const confirmUpdate = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`) 
+      if (!confirmUpdate) {
+        return
+      }
+
+      itemsService
+        .update(updateId, newPersonObject)
+        .then(updatedPersons => {
+          setPersons(updatedPersons)
+          setNewName('')
+          setNewNumber('')
+          setToggle(!toggle)
+        })
+      return console.log(`update fulfilled`)
+    }
+
+    const maxId = persons.reduce(
+      (max, person) => (person.id > max ? person.id : max),
+      persons[0].id
+    )
 
     const personObject = {
       date: new Date().toISOString(),
-      id: persons.length + 1,
+      id: maxId + 1,
       name: newName,
       number: newNumber,
     }
 
-    axios.
-      post(personsUrl, personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    itemsService
+      .create(personObject)
+      .then(returnedPersons => {
+        setPersons(persons.concat(returnedPersons))
         setNewName('')
         setNewNumber('')
       })
+  }
+
+  const deletePerson = (name, id) => {
+    const confirmDelete = window.confirm(`Delete ${name}?`) 
+    if (!confirmDelete) {
+      return
+    }
+    itemsService
+      .deleteItem(id)
+      .then(() => setToggle(!toggle))   
+  }
+
+  const sendToPersonForm = (name, number) => {
+    setNewName(name) 
+    setNewNumber(number) 
   }
 
   const handlePersonNameChange = (event) => {
@@ -85,7 +131,7 @@ const App = () => {
         newNumber={newNumber}
         handlePersonNumberChange={handlePersonNumberChange} />
       <h2>Numbers</h2>
-      <Persons itemsToShow={itemsToShow} />
+      <Persons itemsToShow={itemsToShow} deletePerson={deletePerson} sendToPersonForm={sendToPersonForm} />
     </>
   )
 }
