@@ -40,14 +40,17 @@ const App = () => {
       let updatedPerson = persons.filter(item => item.name === newName)
       let updateId = updatedPerson.map(item => item.id)
       updateId = updateId[0]
-
-      const newPersonObject = {
-          date: new Date().toISOString(),
-          id: updateId,
-          name: newName,
-          number: newNumber
-        }
       
+      const newPersonObject = {
+        date: new Date().toISOString(),
+        id: updateId,
+        name: newName,
+        number: newNumber
+      }
+      const confirmUpdate = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`) 
+      if (!confirmUpdate) {
+        return
+      }
 
       itemsService
         .update(updateId, newPersonObject)
@@ -81,14 +84,19 @@ const App = () => {
       })
   }
 
-  const deletePerson = (event) => {
-    const confirmDelete = window.confirm(`Delete ${event.target.name}?`) 
+  const deletePerson = (name, id) => {
+    const confirmDelete = window.confirm(`Delete ${name}?`) 
     if (!confirmDelete) {
       return
     }
     itemsService
-      .deleteItem(event.target.className)
+      .deleteItem(id)
       .then(() => setToggle(!toggle))   
+  }
+
+  const sendToPersonForm = (name, number) => {
+    setNewName(name) 
+    setNewNumber(number) 
   }
 
   const handlePersonNameChange = (event) => {
@@ -123,7 +131,7 @@ const App = () => {
         newNumber={newNumber}
         handlePersonNumberChange={handlePersonNumberChange} />
       <h2>Numbers</h2>
-      <Persons itemsToShow={itemsToShow} deletePerson={deletePerson} />
+      <Persons itemsToShow={itemsToShow} deletePerson={deletePerson} sendToPersonForm={sendToPersonForm} />
     </>
   )
 }

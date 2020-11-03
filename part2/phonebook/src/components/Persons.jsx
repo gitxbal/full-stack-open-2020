@@ -1,8 +1,7 @@
 import React from 'react'
 import Item from './Item'
 
-const Persons = ({ itemsToShow, deletePerson }) => {
-console.log(itemsToShow)
+const Persons = ({ itemsToShow, deletePerson, sendToPersonForm }) => {
 return(
     <>
         <section>
@@ -13,7 +12,8 @@ return(
                         name={person.name} 
                         number={person.number} 
                         id={person.id} 
-                        deletePerson={deletePerson}/>
+                        deletePerson={deletePerson}
+                        sendToPersonForm={sendToPersonForm}/>
                 )}
             </ul>
         </section>
