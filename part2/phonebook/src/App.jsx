@@ -12,7 +12,7 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-  const [ deleted , setDeleted ] = useState(0)
+  const [ toggle , setToggle ] = useState(false)
 
   useEffect(() => {
     console.log('effect')
@@ -22,7 +22,7 @@ const App = () => {
         console.log('promise fulfilled')
         setPersons(initialItems)
       })
-  }, [deleted])
+  }, [toggle])
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -33,8 +33,31 @@ const App = () => {
     if (!phoneNumberRegex.test(newNumber)) {
       return alert('Please enter a valid 10-digit phone number')
     }
-    if (persons.some(item => item.name === newName)) {
+    if (persons.some(item => item.name === newName) && persons.some(item => item.number === newNumber)) {
       return alert(`${newName} is already added to phonebook`)
+    }
+    if (persons.some(item => item.name === newName)) {
+      let updatedPerson = persons.filter(item => item.name === newName)
+      let updateId = updatedPerson.map(item => item.id)
+      updateId = updateId[0]
+
+      const newPersonObject = {
+          date: new Date().toISOString(),
+          id: updateId,
+          name: newName,
+          number: newNumber
+        }
+      
+
+      itemsService
+        .update(updateId, newPersonObject)
+        .then(updatedPersons => {
+          setPersons(updatedPersons)
+          setNewName('')
+          setNewNumber('')
+          setToggle(!toggle)
+        })
+      return console.log(`update fulfilled`)
     }
 
     const maxId = persons.reduce(
@@ -49,8 +72,8 @@ const App = () => {
       number: newNumber,
     }
 
-    itemsService.
-      create(personObject)
+    itemsService
+      .create(personObject)
       .then(returnedPersons => {
         setPersons(persons.concat(returnedPersons))
         setNewName('')
@@ -64,8 +87,8 @@ const App = () => {
       return
     }
     itemsService
-    .deleteItem(event.target.className)
-    .then(() => setDeleted(deleted + 1))   
+      .deleteItem(event.target.className)
+      .then(() => setToggle(!toggle))   
   }
 
   const handlePersonNameChange = (event) => {

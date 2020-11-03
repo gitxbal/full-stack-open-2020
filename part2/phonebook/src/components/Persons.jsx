@@ -1,7 +1,9 @@
 import React from 'react'
 import Item from './Item'
 
-const Persons = ({ itemsToShow, deletePerson }) => (
+const Persons = ({ itemsToShow, deletePerson }) => {
+console.log(itemsToShow)
+return(
     <>
         <section>
             <ul>
@@ -16,7 +18,7 @@ const Persons = ({ itemsToShow, deletePerson }) => (
             </ul>
         </section>
     </>
-)
+)}
 
 export default Persons
 
