@@ -25,6 +25,9 @@ tr {
   font-size: 1.1rem;
 }
 
+.item-row td {
+  padding-left: 1rem;
+}
 /* Portrait */
 @media only screen 
   and (min-device-width: 375px) 

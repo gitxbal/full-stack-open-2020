@@ -1,12 +1,13 @@
 import React from 'react'
+import { BiCircle } from 'react-icons/bi'
 
 const Item = ({ name, number, id, deletePerson, sendToPersonForm}) => {    
     return (
     <>
-      <tr style={{paddingBottom: "1rem", height: "3rem" }}>
-        <td></td>
+      <tr className="item-row" style={{paddingBottom: "1rem", height: "3rem" }}>
+        <td><BiCircle /></td>
         <td>{name}</td>
-        <td style={{paddingLeft: "1rem"}}>{number}</td>
+        <td>{number}</td>
           
         <td>
           <button
