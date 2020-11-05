@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
 import Notification from './components/Notification'
+import Footer from './components/Footer'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -92,8 +93,9 @@ return (
       <input 
         value={newNote} 
         onChange={handleNoteChange}/>
-  <button type="submit" style={{marginLeft: "1rem", backgroundColor: "#BFDFC9", color: "#8F1E5D"}}>save</button>
+      <button type="submit" style={{marginLeft: "1rem", backgroundColor: "#BFDFC9", color: "#8F1E5D"}}>save</button>
     </form> 
+    <Footer />
   </>
 )}
 
