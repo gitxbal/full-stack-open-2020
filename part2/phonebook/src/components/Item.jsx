@@ -1,10 +1,15 @@
 import React from 'react'
+import { BiCircle } from 'react-icons/bi'
 
 const Item = ({ name, number, id, deletePerson, sendToPersonForm}) => {    
     return (
     <>
-      <li style={{margin: "1rem 0" }}>
-          <label htmlFor={`item-${id}`}>{name} {number}</label>
+      <tr className="item-row" style={{paddingBottom: "1rem", height: "3rem" }}>
+        <td><BiCircle /></td>
+        <td>{name}</td>
+        <td>{number}</td>
+          
+        <td>
           <button
               onClick={() => sendToPersonForm(name, number)}
               style={
@@ -13,8 +18,10 @@ const Item = ({ name, number, id, deletePerson, sendToPersonForm}) => {
                   color: "#8F1E5D", 
                   padding: "0.25rem", 
                   fontWeight: "800"}}>
-              update
+              update 
             </button>
+        </td>
+        <td>
           <button
               onClick={() => deletePerson(name, id)}
               style={
@@ -25,7 +32,8 @@ const Item = ({ name, number, id, deletePerson, sendToPersonForm}) => {
                   fontWeight: "800"}}>
               delete
             </button>
-        </li>
+        </td>
+      </tr>
     </>
     )
 }

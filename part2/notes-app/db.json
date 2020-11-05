@@ -4,7 +4,7 @@
       "id": 1,
       "content": "HTML is easy",
       "date": "2019-05-30T17:30:31.098Z",
-      "important": false
+      "important": true
     },
     {
       "id": 2,
@@ -57,7 +57,7 @@
     {
       "content": "new",
       "date": "2020-11-01T20:51:58.242Z",
-      "important": true,
+      "important": false,
       "id": 10
     },
     {
@@ -65,12 +65,6 @@
       "date": "2020-11-01T21:11:24.798Z",
       "important": false,
       "id": 11
-    },
-    {
-      "content": "new",
-      "date": "2020-11-01T21:11:48.176Z",
-      "important": false,
-      "id": 12
     }
   ]
 }

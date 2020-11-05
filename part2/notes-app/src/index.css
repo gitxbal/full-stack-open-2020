@@ -14,3 +14,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.error {
+  color: crimson;
+  background: lightgrey;
+  font-size: 1.25rem;
+  border-style: solid;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.important-toggle button {
+  background-color: #ff69b4;
+  font-weight: 800;
+  font-size: 1.25rem;
+  padding: 0.5rem 3rem;
+}
+
+.note-item {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: rgb(46, 45, 45);
+}
+
+.note-item button {
+  margin-left: 1rem;
+  background: mediumturquoise;
+  color: purple;
+  font-weight: 700;
+  padding: 0.3rem;
+  border-radius: 3rem;
+}

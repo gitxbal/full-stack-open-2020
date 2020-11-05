@@ -4,8 +4,8 @@ import Item from './Item'
 const Persons = ({ itemsToShow, deletePerson, sendToPersonForm }) => {
 return(
     <>
-        <section>
-            <ul>
+        <table>
+            <tbody>
                 {itemsToShow.map(person => 
                     <Item 
                         key={person.id} 
@@ -15,8 +15,8 @@ return(
                         deletePerson={deletePerson}
                         sendToPersonForm={sendToPersonForm}/>
                 )}
-            </ul>
-        </section>
+            </tbody>
+        </table>
     </>
 )}
 
