@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import itemsService from './services/items'
+import Notification from './components/Notification'
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -13,6 +14,8 @@ const App = () => {
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [ toggle , setToggle ] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('some error happened...')
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     console.log('effect')
@@ -60,8 +63,28 @@ const App = () => {
           setNewNumber('')
           setToggle(!toggle)
         })
+        .then(message => {
+          setErrorMessage(
+            `Updated ${newName}`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        })
+        .catch(error => {
+          setIsError(true)
+          setErrorMessage(
+            `Information of ${newName} has already been removed from server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+            setErrorMessage(false)
+          }, 5000)
+        })
       return console.log(`update fulfilled`)
+      
     }
+  
 
     const maxId = persons.reduce(
       (max, person) => (person.id > max ? person.id : max),
@@ -82,6 +105,24 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
+      .then(message => {
+        setErrorMessage(
+          `Added ${newName}`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
+      .catch(error => {
+        setIsError(true)
+        setErrorMessage(
+          `While adding ${newName} the following error occurred: ${error}`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+          setIsError(false)
+        }, 5000)
+      })
   }
 
   const deletePerson = (name, id) => {
@@ -89,9 +130,28 @@ const App = () => {
     if (!confirmDelete) {
       return
     }
+    const deletedPerson = newName
     itemsService
       .deleteItem(id)
-      .then(() => setToggle(!toggle))   
+      .then(() => setToggle(!toggle))  
+      .then(message => {
+        setErrorMessage(
+          `Deleted ${deletedPerson}`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
+      .catch(error => {
+        setIsError(true)
+        setErrorMessage(
+          `While deleting ${deletedPerson} the following error occurred: ${error}`
+        )
+        setTimeout(() => {
+          setIsError(false)
+          setErrorMessage(null)
+        }, 5000)
+      }) 
   }
 
   const sendToPersonForm = (name, number) => {
@@ -121,17 +181,27 @@ const App = () => {
 
   return (
     <>
-      <h1>Phonebook</h1>
-      <Filter filterName={filterName}
-        handleFilterChange={handleFilterChange} />
-      <h2>add a new number</h2>
-      <PersonForm addPerson={addPerson}
-        newName={newName}
-        handlePersonNameChange={handlePersonNameChange}
-        newNumber={newNumber}
-        handlePersonNumberChange={handlePersonNumberChange} />
-      <h2>Numbers</h2>
-      <Persons itemsToShow={itemsToShow} deletePerson={deletePerson} sendToPersonForm={sendToPersonForm} />
+      <header id="one">
+        <h1>Phonebook</h1>
+        <Notification message={errorMessage} errorToggle={isError} />
+        <Filter filterName={filterName}
+          handleFilterChange={handleFilterChange} />
+      </header>
+      <section id="two">
+        <h2>add a new number</h2>
+        <PersonForm addPerson={addPerson}
+          newName={newName}
+          handlePersonNameChange={handlePersonNameChange}
+          newNumber={newNumber}
+          handlePersonNumberChange={handlePersonNumberChange} />
+      </section>
+      <section id="three">
+        <h2>Numbers</h2>
+        <Persons 
+          itemsToShow={itemsToShow} 
+          deletePerson={deletePerson} 
+          sendToPersonForm={sendToPersonForm} />
+      </section>
     </>
   )
 }
