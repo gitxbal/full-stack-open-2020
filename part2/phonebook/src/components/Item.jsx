@@ -23,7 +23,9 @@ const Item = ({ name, number, id, deletePerson, sendToPersonForm}) => {
         </td>
         <td>
           <button
-              onClick={() => deletePerson(name, id)}
+              name={name}
+              onClick={ event => { console.log(event.target.name) 
+                deletePerson(event.target.name, id)}}
               style={
                   {marginLeft: "1rem",
                   backgroundColor: "#FD6604", 

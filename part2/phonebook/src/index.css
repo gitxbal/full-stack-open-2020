@@ -14,23 +14,43 @@ code {
     monospace;
 }
 
-h1 {
+#one h1 {
   color: darkgreen;
   font-style: italic;
 }
 
-tr {
+#three tr {
   color: rgb(65, 64, 64);
   padding-top: 0.25rem;
   font-size: 1.1rem;
 }
 
-.item-row td {
+#three .item-row td {
   padding-left: 1rem;
 }
+
+/* MESSAGES */
+
+#one .error {
+  color: crimson;
+}
+#one .success {
+  color: forestgreen;
+}
+#one .notice {
+  background: lightgrey;
+  min-width: 50vw;
+  max-width: 80%;
+  font-size: 1.25rem;
+  border-style: solid;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 /* Portrait */
 @media only screen 
-  and (min-device-width: 375px) 
+  and (min-device-width: 300px) 
   and (max-device-width: 812px) 
   and (-webkit-min-device-pixel-ratio: 3)
   and (orientation: portrait) { 
@@ -39,5 +59,22 @@ tr {
     width: 100%;
     height: 100%;
     margin: 1rem 1rem;
+  }
+
+  #three tr {
+    color: rgb(65, 64, 64);
+    padding-top: 0.25rem;
+    font-size: 1rem;
+    padding-bottom: 1rem;
+    height: 25rem;
+    display: flex;
+    min-width: 50vw;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  #three .item-row td {
+    padding-left: 0.25rem;
+    display: block;
   }
 }
