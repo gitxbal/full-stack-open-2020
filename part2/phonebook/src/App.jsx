@@ -16,6 +16,7 @@ const App = () => {
   const [ toggle , setToggle ] = useState(false)
   const [errorMessage, setErrorMessage] = useState('some error happened...')
   const [isError, setIsError] = useState(false)
+  const [deletedPerson, setDeletedPerson] = useState('')
 
   useEffect(() => {
     console.log('effect')
@@ -126,20 +127,22 @@ const App = () => {
   }
 
   const deletePerson = (name, id) => {
+    setDeletedPerson(name)
+    const message = `Deleted ${deletedPerson}`
     const confirmDelete = window.confirm(`Delete ${name}?`) 
     if (!confirmDelete) {
       return
     }
-    const deletedPerson = newName
     itemsService
       .deleteItem(id)
       .then(() => setToggle(!toggle))  
-      .then(message => {
+      .then(() => {
         setErrorMessage(
-          `Deleted ${deletedPerson}`
+          message
         )
         setTimeout(() => {
           setErrorMessage(null)
+          setDeletedPerson('')
         }, 5000)
       })
       .catch(error => {
