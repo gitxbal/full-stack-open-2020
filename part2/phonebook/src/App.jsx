@@ -14,7 +14,7 @@ const App = () => {
   const [filterName, setFilterName] = useState('')
   const phoneNumberRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [ toggle , setToggle ] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('some error happened...')
+  const [errorMessage, setErrorMessage] = useState(null)
   const [isError, setIsError] = useState(false)
   const [deletedPerson, setDeletedPerson] = useState('')
 
