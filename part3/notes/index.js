@@ -32,12 +32,7 @@ let notes = [
 
   app.get('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
-    console.log(id)
-    const note = notes.find(note => {
-      console.log(note.id, typeof note.id, id, typeof id, note.id === id)
-      note.id === id
-    })
-    console.log(note)
+    const note = notes.find(note => note.id === id)
     response.json(note)
   })
 
