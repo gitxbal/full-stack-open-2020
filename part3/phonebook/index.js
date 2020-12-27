@@ -88,6 +88,36 @@ app.get('/', (request, response) => {
     response.status(204).end()
   })
 
+  const generateRandomId = () => {
+    const randomId = notes.length > 0
+    ? Math.random() * Math.random() 
+    : 1
+    return randomId
+  }
+  app.post('/api/persons', (request, response) => {
+  
+    const body = request.body
+    
+    if (!body.name || !body.number){
+      return response.status(400).json(
+        {
+          error: "name or number is missing"
+        }
+      )
+    }
+    const person = {
+        name: body.name,
+        number: body.number,
+        date: new Date(),
+        id: generateRandomId(),
+      }
+  
+      person = persons.concat(person)
+    
+      response.json(person)
+
+})
+
 const PORT = 6001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
