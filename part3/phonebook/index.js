@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-app.use(express.static(__dirname + '/public')); //__dir and not _dir
+app.use(express.json())
 
 let persons = [
     {
@@ -60,7 +60,7 @@ let persons = [
 ]
 
 app.get('/', (request, response) => {
-    response.send('<h1>Hello Phonebook!</h1>')
+    response.send('<h1>Hello Phonebook!</h1><a href="http://localhost:6001/info">link</a>')
   })
   
   app.get('/api/persons', (request, response) => {
@@ -70,6 +70,16 @@ app.get('/', (request, response) => {
 
   app.get('/info', (request, response) => {
     response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${new Date()}</p>`)
+  })
+
+  app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const person = persons.find(person => person.id === id)
+    if (person) {
+      response.json(person)
+    } else {
+      response.status(404).end()
+    }
   })
 
 const PORT = 6001
