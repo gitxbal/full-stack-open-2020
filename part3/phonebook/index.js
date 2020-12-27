@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.static(__dirname + '/public')); //__dir and not _dir
 
 let persons = [
     {
@@ -64,6 +65,11 @@ app.get('/', (request, response) => {
   
   app.get('/api/persons', (request, response) => {
     response.json(persons)
+  })
+
+
+  app.get('/info', (request, response) => {
+    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${new Date()}</p>`)
   })
 
 const PORT = 6001
