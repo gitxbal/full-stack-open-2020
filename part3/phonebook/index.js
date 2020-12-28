@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json())
 
 let persons = [
     {
@@ -59,12 +60,72 @@ let persons = [
 ]
 
 app.get('/', (request, response) => {
-    response.send('<h1>Hello Phonebook!</h1>')
+    response.send('<h1>Hello Phonebook!</h1><a href="http://localhost:6001/info">INFO PAGE</a>')
   })
   
   app.get('/api/persons', (request, response) => {
     response.json(persons)
   })
+
+
+  app.get('/info', (request, response) => {
+    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${new Date()}</p><a href="http://localhost:6001/">HOME PAGE</a>`)
+  })
+
+  app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const person = persons.find(person => person.id === id)
+    if (person) {
+      response.json(person)
+    } else {
+      response.status(404).end()
+    }
+  })
+
+  app.delete('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    persons = persons.filter(person => person.id !== id)
+    response.status(204).end()
+  })
+
+  const generateRandomId = () => {
+    const randomId = persons.length > 0
+    ? Math.floor(Math.random() * 10000000)
+    : 1
+    return randomId
+  }
+  app.post('/api/persons', (request, response) => {
+    const body = request.body
+    console.log(body)
+    if (!body.name || !body.number){
+      return response.status(400).json(
+        {
+          error: "name and/or number is missing"
+        }
+      )
+    }
+    
+    const names = persons.map(person => person.name)
+    
+    if (names.includes(body.name)){
+      return response.status(400).json(
+        {
+          error: "name must be unique"
+        }
+      )
+    }
+    let person = {
+        name: body.name,
+        number: body.number,
+        date: new Date(),
+        id: generateRandomId(),
+      }
+  
+      person = persons.concat(person)
+    
+      response.json(person)
+
+})
 
 const PORT = 6001
 app.listen(PORT)
