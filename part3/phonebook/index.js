@@ -106,7 +106,7 @@ app.get('/', (request, response) => {
     }
     
     const names = persons.map(person => person.name)
-    
+
     if (names.includes(body.name)){
       return response.status(400).json(
         {
@@ -114,18 +114,17 @@ app.get('/', (request, response) => {
         }
       )
     }
-    let person = {
-        name: body.name,
-        number: body.number,
-        date: new Date(),
-        id: generateRandomId(),
-      }
+    const person = {
+      date: new Date(),
+      id: generateRandomId(),
+      name: body.name,
+      number: body.number,
+    }
   
-      person = persons.concat(person)
-    
-      response.json(person)
-
-})
+    persons = persons.concat(person)
+  
+    response.json(person)
+  })
 
 const PORT = 6001
 app.listen(PORT)
