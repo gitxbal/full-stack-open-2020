@@ -89,23 +89,22 @@ app.get('/', (request, response) => {
   })
 
   const generateRandomId = () => {
-    const randomId = notes.length > 0
-    ? Math.random() * Math.random() 
+    const randomId = persons.length > 0
+    ? Math.floor(Math.random() * 10000000)
     : 1
     return randomId
   }
   app.post('/api/persons', (request, response) => {
-  
     const body = request.body
-    
-    if (!body.name || !body.number){
+    console.log(body)
+    if (!body.name){
       return response.status(400).json(
         {
-          error: "name or number is missing"
+          error: "name is missing"
         }
       )
     }
-    const person = {
+    let person = {
         name: body.name,
         number: body.number,
         date: new Date(),
