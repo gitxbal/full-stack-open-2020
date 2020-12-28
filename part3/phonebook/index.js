@@ -1,10 +1,9 @@
 const express = require('express')
 const app = express()
-var morgan = require('morgan')
+const morgan = require('morgan')
 app.use(express.json())
 app.use(morgan)
-
-morgan('tiny')
+morgan('default', 'tiny')
 
 let persons = [
     {
@@ -129,6 +128,16 @@ app.get('/', (request, response) => {
   
     response.json(person)
   })
+  morgan((tokens, req, res) => {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, 'content-length'), '-',
+      tokens['response-time'](req, res), 'ms'
+    ].join(' ')
+  }) 
+
 
 const PORT = 6001
 app.listen(PORT)
