@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 app.use(express.json())
+// app.use(morgan('tiny'))
+morgan.token('body', (req, res) => JSON.stringify(req.body)) 
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
 
 let persons = [
     {
@@ -59,33 +63,33 @@ let persons = [
       }
 ]
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hello Phonebook!</h1><a href="http://localhost:6001/info">INFO PAGE</a>')
+app.get('/', (req, res) => {
+    res.send('<h1>Hello Phonebook!</h1><a href="http://localhost:6001/info">INFO PAGE</a>')
   })
   
-  app.get('/api/persons', (request, response) => {
-    response.json(persons)
+  app.get('/api/persons', (req, res) => {
+    res.json(persons)
   })
 
 
-  app.get('/info', (request, response) => {
-    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${new Date()}</p><a href="http://localhost:6001/">HOME PAGE</a>`)
+  app.get('/info', (req, res) => {
+    res.send(`<p>Phonebook has info for ${persons.length} people</p><p>${new Date()}</p><a href="http://localhost:6001/">HOME PAGE</a>`)
   })
 
-  app.get('/api/persons/:id', (request, response) => {
+  app.get('/api/persons/:id', (req, res) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
     if (person) {
-      response.json(person)
+      res.json(person)
     } else {
-      response.status(404).end()
+      res.status(404).end()
     }
   })
 
-  app.delete('/api/persons/:id', (request, response) => {
+  app.delete('/api/persons/:id', (req, res) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
-    response.status(204).end()
+    res.status(204).end()
   })
 
   const generateRandomId = () => {
@@ -94,11 +98,11 @@ app.get('/', (request, response) => {
     : 1
     return randomId
   }
-  app.post('/api/persons', (request, response) => {
-    const body = request.body
-    console.log(body)
+  app.post('/api/persons', (req, res) => {
+    const body = req.body
+    // console.log(body)
     if (!body.name || !body.number){
-      return response.status(400).json(
+      return res.status(400).json(
         {
           error: "name and/or number is missing"
         }
@@ -106,26 +110,27 @@ app.get('/', (request, response) => {
     }
     
     const names = persons.map(person => person.name)
-    
+
     if (names.includes(body.name)){
-      return response.status(400).json(
+      return res.status(400).json(
         {
           error: "name must be unique"
         }
       )
     }
-    let person = {
-        name: body.name,
-        number: body.number,
-        date: new Date(),
-        id: generateRandomId(),
-      }
+    const person = {
+      date: new Date(),
+      id: generateRandomId(),
+      name: body.name,
+      number: body.number,
+    }
   
-      person = persons.concat(person)
-    
-      response.json(person)
+    persons = [...persons, person]
 
-})
+    res.json(person)
+  })
+
+
 
 const PORT = 6001
 app.listen(PORT)
